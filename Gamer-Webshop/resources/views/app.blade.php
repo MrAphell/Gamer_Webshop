@@ -9,7 +9,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="d-flex flex-column" style="height: 100vh;">
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -34,9 +34,39 @@
       </nav>
   </header>
 
-  <main>
+  <main class="flex-grow-1">
     @yield('content')
   </main>
+
+  <hr class="my-4" style=" border-top: 2px solid #ffffff74; margin: 25px">
+
+  <footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-4">
+          <h5 class="mb-3">Gamer Webshop</h5>
+          <p>&copy; 2025 Gamer Webshop. Minden jog fenntartva.</p>
+        </div>
+
+        <div class="col-md-4">
+          <h5 class="mb-3">Gyors linkek</h5>
+          <ul class="list-unstyled">
+            <li><a href="{{ route('products.index') }}" class="text-white text-decoration-none">Termékek</a></li>
+            <li><a href="{{ route('categories.index') }}" class="text-white text-decoration-none">Kategóriák</a></li>
+            <li><a href="{{ route('orders.index') }}" class="text-white text-decoration-none">Rendelések</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <h5 class="mb-3">Kapcsolat</h5>
+          <p>Email: <a href="mailto:info@gamerwebshop.com" class="text-white text-decoration-none">info@gamerwebshop.com</a></p>
+          <p>Telefon: +36 1 234 5678</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
