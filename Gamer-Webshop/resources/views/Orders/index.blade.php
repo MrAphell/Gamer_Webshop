@@ -1,17 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Rendelések</h1>
-    <a href="{{ route('orders.create') }}">Új rendelés hozzáadása</a>
+<div class="container">
+    <h1 class="mt-5">Rendelések</h1>
+    <a href="{{ route('orders.create') }}" class="btn btn-primary mb-3">Új rendelés hozzáadása</a>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Termék</th>
                 <th>Mennyiség</th>
                 <th>Teljes ár</th>
                 <th>Rendelés dátuma</th>
-                <th>Akciók</th>
+                <th>Műveletek</th>
             </tr>
         </thead>
         <tbody>
@@ -25,11 +26,12 @@
                         <form action="{{ route('orders.destroy', $order->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Törlés</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Törlés</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+</div>
 @endsection

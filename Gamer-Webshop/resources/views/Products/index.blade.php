@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Termékek</h1>
+        <h1 class="mt-5">Termékek</h1>
         <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Új termék hozzáadása</a>
 
         <table class="table table-striped">

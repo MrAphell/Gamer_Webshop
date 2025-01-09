@@ -10,7 +10,8 @@ class OrderController extends Controller
 {
     public function index()
 {
-    return response()->json(Order::with('product')->get());
+    $orders = Order::with('product')->get();
+    return view('orders.index', compact('orders'));
 }
 
 public function store(Request $request)
