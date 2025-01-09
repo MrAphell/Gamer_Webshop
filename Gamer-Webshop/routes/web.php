@@ -7,8 +7,8 @@ use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('layouts.welcome');
+})->name('welcome');
 
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 Route::get('products/create', [ProductController::class, 'create'])->name('products.create');

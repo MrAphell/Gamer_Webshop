@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('app')
 
 @section('content')
 <div class="container">
-    <h1 class="mt-5">Kategóriák</h1>
+    <h1 class="mt-5 text-center">Kategóriák</h1>
     <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Új kategória hozzáadása</a>
 
     <table class="table table-striped">
@@ -10,7 +10,7 @@
             <tr>
                 <th>Kategória neve</th>
                 <th>Leírás</th>
-                <th>Akciók</th>
+                <th>Műveletek</th>
             </tr>
         </thead>
         <tbody>

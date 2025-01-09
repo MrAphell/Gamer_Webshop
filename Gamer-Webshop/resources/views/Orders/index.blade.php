@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('app')
 
 @section('content')
 <div class="container">
-    <h1 class="mt-5">Rendelések</h1>
+    <h1 class="mt-5 text-center">Rendelések</h1>
     <a href="{{ route('orders.create') }}" class="btn btn-primary mb-3">Új rendelés hozzáadása</a>
 
     <table class="table table-striped">
