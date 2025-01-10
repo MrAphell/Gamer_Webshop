@@ -11,7 +11,13 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category')->get();
-    return view('products.index', compact('products'));
+        return view('products.index', compact('products'));
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -25,12 +31,18 @@ class ProductController extends Controller
 
         $product = Product::create($request->all());
 
-        return response()->json($product, 201);
+        return redirect()->route('products.index')->with('success', 'Termék sikeresen létrehozva!');
     }
 
     public function show(Product $product)
     {
         return response()->json($product);
+    }
+
+    public function edit(Product $product)
+    {
+        $categories = Category::all();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, Product $product)
@@ -44,14 +56,13 @@ class ProductController extends Controller
 
         $product->update($request->all());
 
-        return response()->json($product);
+        return redirect()->route('products.index')->with('success', 'Termék sikeresen frissítve!');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
 
-        return response()->json(null, 204);
+        return redirect()->route('products.index')->with('success', 'Termék sikeresen törölve!');
     }
-
 }

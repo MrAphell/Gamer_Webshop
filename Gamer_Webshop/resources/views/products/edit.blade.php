@@ -1,32 +1,45 @@
 @extends('app')
 
 @section('content')
-    <h1>Termék szerkesztése</h1>
-    <form action="{{ route('products.update', $product->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div class="container mt-5">
+        <h1>Termék szerkesztése</h1>
 
-        <label for="name">Név</label>
-        <input type="text" name="name" id="name" value="{{ $product->name }}" required>
+        <form action="{{ route('products.update', $product->id) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-        <label for="description">Leírás</label>
-        <textarea name="description" id="description" required>{{ $product->description }}</textarea>
+            <div class="form-group mb-3">
+                <label for="name" class="form-label">Név</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{ $product->name }}" required>
+            </div>
 
-        <label for="price">Ár</label>
-        <input type="number" name="price" id="price" value="{{ $product->price }}" required>
+            <div class="form-group mb-3">
+                <label for="description" class="form-label">Leírás</label>
+                <textarea name="description" id="description" class="form-control" required>{{ $product->description }}</textarea>
+            </div>
 
-        <label for="stock">Készlet</label>
-        <input type="number" name="stock" id="stock" value="{{ $product->stock }}" required>
+            <div class="form-group mb-3">
+                <label for="price" class="form-label">Ár</label>
+                <input type="number" name="price" id="price" class="form-control" value="{{ $product->price }}" required>
+            </div>
 
-        <label for="category_id">Kategória</label>
-        <select name="category_id" id="category_id" required>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
-                    {{ $category->name }}
-                </option>
-            @endforeach
-        </select>
+            <div class="form-group mb-3">
+                <label for="stock" class="form-label">Készlet</label>
+                <input type="number" name="stock" id="stock" class="form-control" value="{{ $product->stock }}" required>
+            </div>
 
-        <button type="submit">Frissítés</button>
-    </form>
+            <div class="form-group mb-3">
+                <label for="category_id" class="form-label">Kategória</label>
+                <select name="category_id" id="category_id" class="form-select" required>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Frissítés</button>
+        </form>
+    </div>
 @endsection

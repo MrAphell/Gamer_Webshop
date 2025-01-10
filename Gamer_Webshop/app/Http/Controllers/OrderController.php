@@ -9,41 +9,46 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function index()
-{
-    $orders = Order::with('product')->get();
-    return view('orders.index', compact('orders'));
-}
+    {
+        $orders = Order::with('product')->get();
+        return view('orders.index', compact('orders'));
+    }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'product_id' => 'required|exists:products,id',
-        'quantity' => 'required|integer',
-    ]);
+    public function create()
+    {
+        $products = Product::all();
+        return view('orders.create', compact('products'));
+    }
 
-    $product = Product::find($request->product_id);
-    $totalPrice = $product->price * $request->quantity;
+    public function store(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer',
+        ]);
 
-    $order = Order::create([
-        'product_id' => $request->product_id,
-        'order_date' => now(),
-        'quantity' => $request->quantity,
-        'total_price' => $totalPrice,
-    ]);
+        $product = Product::find($request->product_id);
+        $totalPrice = $product->price * $request->quantity;
 
-    return response()->json($order, 201);
-}
+        $order = Order::create([
+            'product_id' => $request->product_id,
+            'order_date' => now(),
+            'quantity' => $request->quantity,
+            'total_price' => $totalPrice,
+        ]);
 
-public function show(Order $order)
-{
-    return response()->json($order);
-}
+        return redirect()->route('orders.index')->with('success', 'Rendelés sikeresen létrehozva!');
+    }
 
-public function destroy(Order $order)
-{
-    $order->delete();
+    public function show(Order $order)
+    {
+        return response()->json($order);
+    }
 
-    return response()->json(null, 204);
-}
+    public function destroy(Order $order)
+    {
+        $order->delete();
 
+        return redirect()->route('orders.index')->with('success', 'Rendelés sikeresen törölve!');
+    }
 }

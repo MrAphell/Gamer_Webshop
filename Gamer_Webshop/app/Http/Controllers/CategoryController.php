@@ -8,11 +8,15 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index()
-{
-    $categories = Category::all();
-    return view('categories.index', compact('categories'));
-}
+    {
+        $categories = Category::all();
+        return view('categories.index', compact('categories'));
+    }
 
+    public function create()
+    {
+        return view('categories.create');
+    }
 
     public function store(Request $request)
     {
@@ -22,12 +26,17 @@ class CategoryController extends Controller
 
         $category = Category::create($request->all());
 
-        return response()->json($category, 201);
+        return redirect()->route('categories.index')->with('success', 'Kategória sikeresen létrehozva!');
     }
 
     public function show(Category $category)
     {
         return response()->json($category);
+    }
+
+    public function edit(Category $category)
+    {
+        return view('categories.edit', compact('category'));
     }
 
     public function update(Request $request, Category $category)
@@ -38,14 +47,13 @@ class CategoryController extends Controller
 
         $category->update($request->all());
 
-        return response()->json($category);
+        return redirect()->route('categories.index')->with('success', 'Kategória sikeresen frissítve!');
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
 
-        return response()->json(null, 204);
+        return redirect()->route('categories.index')->with('success', 'Kategória sikeresen törölve!');
     }
-
 }

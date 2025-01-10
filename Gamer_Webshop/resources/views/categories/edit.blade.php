@@ -1,17 +1,24 @@
 @extends('app')
 
 @section('content')
-    <h1>Kategória szerkesztése</h1>
-    <form action="{{ route('categories.update', $category->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div class="container mt-5">
+        <h1>Kategória szerkesztése</h1>
 
-        <label for="name">Név</label>
-        <input type="text" name="name" id="name" value="{{ $category->name }}" required>
+        <form action="{{ route('categories.update', $category->id) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-        <label for="description">Leírás</label>
-        <textarea name="description" id="description">{{ $category->description }}</textarea>
+            <div class="form-group mb-3">
+                <label for="name" class="form-label">Név</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{ $category->name }}" required>
+            </div>
 
-        <button type="submit">Frissítés</button>
-    </form>
+            <div class="form-group mb-3">
+                <label for="description" class="form-label">Leírás</label>
+                <textarea name="description" id="description" class="form-control" required>{{ $category->description }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Frissítés</button>
+        </form>
+    </div>
 @endsection
