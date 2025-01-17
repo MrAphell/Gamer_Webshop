@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('layouts.welcome');
