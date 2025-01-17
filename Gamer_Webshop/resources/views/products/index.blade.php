@@ -3,7 +3,10 @@
 @section('content')
     <div class="container">
         <h1 class="mt-5 text-center">Termékek</h1>
-        <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Új termék hozzáadása</a>
+
+        @auth
+            <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Új termék hozzáadása</a>
+        @endauth
 
         <table class="table table-striped">
             <thead>
@@ -23,12 +26,14 @@
                         <td>{{ $product->stock }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Szerkesztés</a>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Törlés</button>
-                            </form>
+                            @auth
+                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Szerkesztés</a>
+                                <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Törlés</button>
+                                </form>
+                            @endauth
                         </td>
                     </tr>
                 @endforeach

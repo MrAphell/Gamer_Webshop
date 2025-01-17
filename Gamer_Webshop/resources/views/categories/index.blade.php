@@ -3,7 +3,10 @@
 @section('content')
 <div class="container">
     <h1 class="mt-5 text-center">Kategóriák</h1>
-    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Új kategória hozzáadása</a>
+
+    @auth
+        <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Új kategória hozzáadása</a>
+    @endauth
 
     <table class="table table-striped">
         <thead>
@@ -19,12 +22,14 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->description }}</td>
                     <td>
-                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Szerkesztés</a>
-                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Törlés</button>
-                        </form>
+                        @auth
+                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Szerkesztés</a>
+                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Törlés</button>
+                            </form>
+                        @endauth
                     </td>
                 </tr>
             @endforeach
